@@ -23,12 +23,17 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-/*app.post("/api/",routes.createProject);
+/*app.get("/api/stock-prices",routes.createStock);
 app.get("/api/getallproject/",routes.getAllProject);
 app.get("/api/issues/:project_name",routes.getIssue);
 app.post("/api/issues/:project_name",routes.createIssue);
 app.put("/api/issues/:project_name",routes.updateIssue);
 app.delete("/api/issues/:project_name",routes.deleteIssue);*/
+
+/api/stock-prices?stock=goog
+/api/stock-prices?stock=goog&like=true
+/api/stock-prices?stock=goog&stock=msft
+/api/stock-prices?stock=goog&stock=msft&like=true
 
 
 if (!module.parent) {
