@@ -1,15 +1,7 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Welcome to Glitch!</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
@@ -17,38 +9,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
-    <header>
-      <h1>
-        A Dream of the Future
-      </h1>
-    </header>
+</head>
 
-    <main>
-      <p class="bold">Oh hi,</p>
-      <p>Tell me your hopes and dreams:</p>
-      <form>
-        <input type="text" maxlength="100" placeholder="Dreams!">
-        <button type="submit">Submit</button>
-      </form>
-      <section class="dreams">
-        <ul id="dreams">
-        </ul>
-      </section>
-    </main>
+<body>
+<div class="mainWrapper">
+    <div class="wrapper">
+        <div class="insideDiv">
+            <form id="bookCreateForm">
+                <input type="text" name="book_title" placeholder="*Book Name" required>
+                <button>Create Book</button>
+              <br>
+              <button id="getAllBooks">Get All Books</button><br>
+              <button id="deleteAllBooks">Delete All Books</button>
+            </form>
+        </div>
+        <div class="insideDiv">
+            Get Book By id
+            <form id="bookGetForm">
+                <input type="text" name="book_id" placeholder="*Book Id" required>
+                <button >Get Book</button>
+            </form>
+                      Delete Book By id
+            <form id="bookDeleteForm">
+                <input type="text" name="book_id" placeholder="*Book Id" required>
+                <button >Delete Book</button>
+            </form>
+                                Add Comment to Book By id
+            <form id="bookUpdateForm">
+                <input type="text" name="book_id" placeholder="*Book Id" required>
+              <input type="text" name="book_comment" placeholder="*Book Comment" required>
+                <button >Add Comment Book</button>
+            </form>
 
-    <footer>
-      <a href="https://glitch.com">
-        Remix this in Glitch
-      </a>
-    </footer>
+        </div>
+        <div class="insideDiv resultDiv">
+        </div>
+    </div>
 
-    <!-- Your web-app is https, so your scripts need to be too -->
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="/client.js"></script>
 
-  </body>
+</body>
+
 </html>

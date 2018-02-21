@@ -1,0 +1,1 @@
+const stockModel = require('../models/stock');
