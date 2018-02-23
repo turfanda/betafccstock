@@ -18,9 +18,29 @@ $(function() {
 
       $("#stockCreateForm").submit(function(e) {
         e.preventDefault();
+        
+        let result;
+        
         $.ajax({
             type: "get",
             url: "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+$('#stockCreateForm').children().val() + "&apikey=" + apikey,
+            success: function(response) {
+              result.stock=$('#stockCreateForm').children().val().toUpperCase();
+              result.price=response["Stock"]
+
+            },
+            error: function(err) {
+                $(".resultDiv").empty();
+                $(".resultDiv").append(err.responseText);
+            }
+        });
+    });
+  
+        $("#stockCompareForm").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "get",
+            url: "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+$('#stockCompareForm').children().val()+","+$("#stockCompareForm").children().eq(1).val() + "&apikey=" + apikey,
             success: function(response) {
                 $("input").val("");
                 $(".resultDiv").empty();
