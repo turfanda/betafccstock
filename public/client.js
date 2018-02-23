@@ -33,7 +33,12 @@ $(function() {
                 url:"/api/stock-prices",
                 data:$('#stockCreateForm').serialize(),
                 success: function(data) {
-                console.log(data);
+                result.like=data;
+                  $(".resultDiv").empty();
+                  console.log(result);
+                  var ResultDiv = $("<div>");
+                  ResultDiv.append($("<div>").addClass("infoDiv").html("<p><em><b>Stock Name :</b></em>" + result.stock + "</p><p><em><b>Stock Price :</b></em>" + result.price +"<p><em><b>Stock Like :</b></em>"+ result.like));
+                  $(".resultDiv").append(ResultDiv);
                 }
 
               
