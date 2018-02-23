@@ -1,84 +1,31 @@
 const stockModel = require('../models/stock');
-
 exports.createStock = function(req, res) {
-      stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
-      if (err) return res.status(501).send("Internal Error");
-      if (data == "") {
-        console.log("empty data")
-            let stock = new stockModel({
-                stock: req.body.stock.toUpperCase(),
-                likes: 1,
-                IP: [req.headers['x-forwarded-for'].split(',')[0]]
-            });
-            stockModel.createStock(stock, function(err, data) {
-                if (err) return res.status(501).send("Internal Error");
-                else {
-                    return res.status(200).send(data.likes.toString());
-                }
-
-            });
-        } 
-      else{
-        if(req.body.like){
-                if(!data[0].IP.includes(req.headers['x-forwarded-for'].split(',')[0])) {
-console.log("differetn ip data")
-            stockModel.updateStock({
-                IP: req.headers['x-forwarded-for'].split(',')[0]
-            }, function(err, data) {
-                if (err) return res.status(501).send("Internal Error");
-                else {
-                    return res.status(200).send(data.likes.toString());
-                }
-
-            });
-
-        } 
-        else {
-        console.log("same ip data")
-            return res.status(501).send("one like from same ip");
-        }
-        
-        }
-        else
-          return res.status(200).send("0");
-
-        
-      }
-    });
-}
-
-
-exports.createStock1 = function(req, res) {
   if(!req.body.like){
     stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
       if (err) return res.status(501).send("Internal Error");
-      if(data!=="")
+      if(data.length!==0)
         return res.status(200).send(data.likes.toString());
       else
         return res.status(200).send("0");
     });
   }
   else{
-      stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
+    stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
       if (err) return res.status(501).send("Internal Error");
-      if (data == "") {
-        console.log("empty data")
-            let stock = new stockModel({
+      if (data.length == 0){
+        let stock = new stockModel({
                 stock: req.body.stock.toUpperCase(),
                 likes: 1,
                 IP: [req.headers['x-forwarded-for'].split(',')[0]]
             });
-            stockModel.createStock(stock, function(err, data) {
-                if (err) return res.status(501).send("Internal Error");
-                else {
-                    return res.status(200).send(data.likes.toString());
-                }
-
-            });
-        } 
+        stockModel.createStock(stock, function(err, data) {
+          if (err) return res.status(501).send("Internal Error");
+          else {
+            return res.status(200).send(data.likes.toString());
+          }
+        });} 
       else{
         if(!data[0].IP.includes(req.headers['x-forwarded-for'].split(',')[0])) {
-console.log("differetn ip data")
             stockModel.updateStock({
                 IP: req.headers['x-forwarded-for'].split(',')[0]
             }, function(err, data) {
@@ -91,7 +38,6 @@ console.log("differetn ip data")
 
         } 
         else {
-        console.log("same ip data")
             return res.status(501).send("one like from same ip");
         }
         
