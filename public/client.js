@@ -72,7 +72,7 @@ $(function() {
           result.price2=response["Stock Quotes"][1]["2. price"];
           $.ajax({
             type:"post",
-            url:"/api/stock-prices",
+            url:"/api/stock-prices-compare",
             data:$('#stockCompareForm').serialize(),
             success: function(data) {
               console.log(data);

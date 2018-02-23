@@ -45,3 +45,6 @@ exports.createStock = function(req, res) {
     });
   }
 }
+exports.compareStock = function(req, res) {
+  console.log(req.body);
+}
