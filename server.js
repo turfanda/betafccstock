@@ -32,7 +32,7 @@ app.get('/apikey', function(req, res,next) {
   res.json(apikey);
 });
 
-app.post("/api/stock-prices",routes.createStock1);
+app.post("/api/stock-prices",routes.createStock);
 
 
 
