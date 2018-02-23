@@ -19,14 +19,25 @@ $(function() {
       $("#stockCreateForm").submit(function(e) {
         e.preventDefault();
         
-        let result;
+        let result={};
         
         $.ajax({
             type: "get",
             url: "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+$('#stockCreateForm').children().val() + "&apikey=" + apikey,
             success: function(response) {
               result.stock=$('#stockCreateForm').children().val().toUpperCase();
-              result.price=response["Stock"]
+              result.price=response["Stock Quotes"][0]["2. price"];
+              
+              $.ajax({
+                type:"post",
+                url:"/api/stock-prices",
+                data:{name:$('#stockCreateForm').children().val(),like:"asd"},
+                success: function(data) {
+                console.log(data);
+                }
+
+              
+              });
 
             },
             error: function(err) {
