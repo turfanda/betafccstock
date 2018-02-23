@@ -27,11 +27,10 @@ $(function() {
             success: function(response) {
               result.stock=$('#stockCreateForm').children().val().toUpperCase();
               result.price=response["Stock Quotes"][0]["2. price"];
-              
               $.ajax({
                 type:"post",
                 url:"/api/stock-prices",
-                data:{name:$('#stockCreateForm').children().val(),like:"asd"},
+                data:$('#stockCreateForm').serialize(),
                 success: function(data) {
                 console.log(data);
                 }
