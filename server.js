@@ -13,6 +13,12 @@ mongoose.connect(process.env.MONGO_URL, function(err){
     }
 });
 
+
+    var listener = app.listen(process.env.PORT, function() {
+        console.log('Your app is listening on port ' + listener.address().port);
+    });
+
+
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -21,12 +27,13 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/apikey', function(req, res,next) {  
+  var apikey=process.env.ALPHA_API_KEY;  
+  res.json(apikey);
+});
+
 app.get("/api/stock-prices",routes.createStock);
 
-if (!module.parent) {
-    var listener = app.listen(process.env.PORT, function() {
-        console.log('Your app is listening on port ' + listener.address().port);
-    });
-}
+
 
 module.exports = app;

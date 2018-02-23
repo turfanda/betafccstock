@@ -1,23 +1,14 @@
 const stockModel = require('../models/stock');
-const https = require("https")
+const request = require("request")
 
 exports.createStock = function(req, res) {
 
-  
-  https.get('https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=MSFT,FB,AAPL&apikey='+process.env.ALPHA_API_KEY, (resp) => {
-  let data = '';
+  request('https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=MSFT,FB,AAPL&apikey='+process.env.ALPHA_API_KEY, { json: true }, (err, res, body) => {
+  if (err) { return console.log(err); }
+  console.log(body.url);
+  console.log(body.explanation);
+});
 
-  resp.on('data', (chunk) => {
-    console.log(data);
-    data += chunk;
-  });
-
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-  });
- 
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
 });
 }
 
