@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const stockScehma = new Schema({
   stock: { type: String, required: true, unique: true },
   likes: { type: Number, default: 0 },
-  IPs: {type: Array, default: []}
+  IP: {type: Array, default: []}
 });
 
 let Stock = mongoose.model('Stock', stockScehma);
