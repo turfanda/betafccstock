@@ -39,7 +39,11 @@ $(function() {
                   var ResultDiv = $("<div>");
                   ResultDiv.append($("<div>").addClass("infoDiv").html("<p><em><b>Stock Name :</b></em>" + result.stock + "</p><p><em><b>Stock Price :</b></em>" + result.price +"<p><em><b>Stock Like :</b></em>"+ result.like));
                   $(".resultDiv").append(ResultDiv);
-                }
+                },
+              error: function(err) {
+                $(".resultDiv").empty();
+                $(".resultDiv").append(err.responseText);
+            }
 
               
               });

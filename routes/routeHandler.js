@@ -1,11 +1,9 @@
 const stockModel = require('../models/stock');
 
 exports.createStock = function(req, res) {
-
-
-    stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
+      stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
       if (err) return res.status(501).send("Internal Error");
-      else if (data == "") {
+      if (data == "") {
         console.log("empty data")
             let stock = new stockModel({
                 stock: req.body.stock.toUpperCase(),
@@ -20,7 +18,9 @@ exports.createStock = function(req, res) {
 
             });
         } 
-      else if (!data[0].IP.includes(req.headers['x-forwarded-for'].split(',')[0])) {
+      else{
+        if(req.body.like){
+                if(!data[0].IP.includes(req.headers['x-forwarded-for'].split(',')[0])) {
 console.log("differetn ip data")
             stockModel.updateStock({
                 IP: req.headers['x-forwarded-for'].split(',')[0]
@@ -33,12 +33,31 @@ console.log("differetn ip data")
             });
 
         } 
-      else {
+        else {
         console.log("same ip data")
-            res.status(501).send("One like Per ip");
+            return res.status(501).send("one like from same ip");
         }
+        
+        }
+        else
+
+        
+      }
+
 
     });
+}
+
+
+    stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
+                    if (err) return res.status(501).send("Internal Error");
+                else {
+                    return res.status(200).send(data.likes.toString());
+                }
+    });
+  
+  
+
 
 
 }
