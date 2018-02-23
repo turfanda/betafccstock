@@ -1,4 +1,5 @@
 var apikey;
+var asd;
 
 function getapikey() {
     $.ajax({
@@ -15,17 +16,21 @@ $(function() {
  if (!apikey)
         getapikey();
 
-  https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols=MSFT,FB,AAPL&apikey='+process.env.ALPHA_API_KEY,
-  
-  
-    $.ajax({
-                url: "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="dataName + "&apikey=" + apikey,
-                type: "get",
-                success: function(data) {
-                    stockVal=controlStockVal(stockVal, data, "add_with_obj");
-                    $(".stockZone").append(drawStock(dataName));
-                    chartyap(stockVal);
-                }
-            });
-  
+      $("#stockCreateForm").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "get",
+            url: "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+$('#stockCreateForm').children().val() + "&apikey=" + apikey,
+            success: function(response) {
+                $("input").val("");
+                $(".resultDiv").empty();
+                console.log(response);
+              asd=response;
+            },
+            error: function(err) {
+                $(".resultDiv").empty();
+                $(".resultDiv").append(err.responseText);
+            }
+        });
+    });
 });
