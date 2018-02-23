@@ -1,6 +1,5 @@
 const stockModel = require('../models/stock');
 exports.createStock = function(req, res) {
-  console.log(req.body);
   if(!req.body.like){
     stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
       console.log(data);
@@ -13,7 +12,6 @@ exports.createStock = function(req, res) {
   }
   else{
     stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
-      console.log(data);
       if (err) return res.status(501).send("Internal Error");
       if (data.length == 0){
         let stock = new stockModel({
@@ -24,7 +22,7 @@ exports.createStock = function(req, res) {
         stockModel.createStock(stock, function(err, data) {
           if (err) return res.status(501).send("Internal Error");
           else {
-            return res.status(200).send(data[0].likes.toString());
+            return res.status(200).send(data.likes.toString());
           }
         });
       } 
@@ -37,15 +35,12 @@ exports.createStock = function(req, res) {
                 else {
                     return res.status(200).send(data[0].likes.toString());
                 }
-
             });
-
         } 
         else {
             return res.status(501).send("one like from same ip");
         }
-        
-        }
-  });
-}
+      }
+    });
+  }
 }
