@@ -27,6 +27,7 @@ $(function() {
             success: function(response) {
               result.stock=$('#stockCreateForm').children().val().toUpperCase();
               result.price=response["Stock Quotes"][0]["2. price"];
+              console.log(result);
               $.ajax({
                 type:"post",
                 url:"/api/stock-prices",
