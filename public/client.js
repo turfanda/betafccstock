@@ -76,9 +76,16 @@ $(function() {
             data:$('#stockCompareForm').serialize(),
             success: function(data) {
               console.log(data);
+              result.like1=data[0].likes;
+              result.like2=data[1].likes;
               $(".resultDiv").empty();
               var ResultDiv = $("<div>");
-              ResultDiv.append($("<div>").addClass("infoDiv").html("<p><em><b>Stock Name :</b></em>" + result.stock + "</p><p><em><b>Stock Price :</b></em>" + result.price +"<p><em><b>Stock Like :</b></em>"+ result.like));
+              ResultDiv.append($("<div>").addClass("infoDiv").html("<p><em><b>Stock1 Name :</b></em>" + result.stock1 +
+                                                                   "</p><p><em><b>Stock1 Price :</b></em>" + result.price1 +
+                                                                   "<p><em><b>Stock1 Rel_Like :</b></em>"+ result.like1+
+                                                                  "<p><em><b>Stock2 Name :</b></em>" + result.stock2 +
+                                                                   "</p><p><em><b>Stock2 Price :</b></em>" + result.price2 +
+                                                                   "<p><em><b>Stock2 Like :</b></em>"+ result.like2));
               $(".resultDiv").append(ResultDiv);
             },
             error: function(err) {

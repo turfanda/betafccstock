@@ -33,7 +33,7 @@ app.get('/apikey', function(req, res,next) {
 });
 
 app.post("/api/stock-prices",routes.createStock);
-app.post("/api/stock-prices-compare",routes.createStock);
+app.post("/api/stock-prices-compare",routes.compareStock);
 
 
 

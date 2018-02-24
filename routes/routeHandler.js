@@ -46,12 +46,12 @@ exports.createStock = function(req, res) {
 }
 exports.compareStock = function(req, res) {
   console.log(req.body);
-  if(!req.body.like){
+ if(!req.body.like){
     stockModel.getTwoStock(req.body.stock[0].toUpperCase(),req.body.stock[1].toUpperCase(),function(err, data) {
       console.log(data);
       if (err) return res.status(501).send("Internal Error");
       if(data.length!==0)
-        return res.status(200).send(data[0].likes.toString());
+        return res.json(data);
       else
         return res.status(200).send("0");
     });
