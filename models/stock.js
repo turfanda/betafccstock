@@ -33,16 +33,6 @@ module.exports.updateTwoStock = function(obj,callback){
 }
 
 module.exports.createTwoStock = function(newStock,callback){
-  newStock.save(callback);
+  newStock[0].save();
+   newStock[1].save(callback);
 }
-
-User.find({$or:[{region: "NA"},{sector:"Some Sector"}]}, function(err, user) 
- {
-    if (err)
-    {
-        res.send(err);
-    }
-    console.log(user);
-    res.json(user);
-
- });
