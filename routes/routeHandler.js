@@ -1,6 +1,5 @@
 const stockModel = require('../models/stock');
 exports.createStock = function(req, res) {
-  console.log(req.body);
   if(!req.body.like){
     stockModel.getStockByName(req.body.stock.toUpperCase(), function(err, data) {
       console.log(data);
@@ -46,5 +45,10 @@ exports.createStock = function(req, res) {
   }
 }
 exports.compareStock = function(req, res) {
-  console.log(req.body);
+  if(!req.body.like){
+        return res.status(200).send("0");
+  }
+  else{
+  
+  }
 }

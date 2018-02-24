@@ -23,3 +23,26 @@ module.exports.getStockByName = function(name,callback){
 module.exports.updateStock = function(obj,callback){
   Stock.findByIdAndUpdate(obj.id,{ "$push": { "IP": obj.IP }, "$inc": {likes: 1} },{new: true},callback)
 }
+
+module.exports.getTwoStock = function(obj,callback){
+  Stock.findByIdAndUpdate(obj.id,{ "$push": { "IP": obj.IP }, "$inc": {likes: 1} },{new: true},callback)
+}
+
+module.exports.updateTwoStock = function(obj,callback){
+  Stock.findByIdAndUpdate(obj.id,{ "$push": { "IP": obj.IP }, "$inc": {likes: 1} },{new: true},callback)
+}
+
+module.exports.createTwoStock = function(newStock,callback){
+  newStock.save(callback);
+}
+
+User.find({$or:[{region: "NA"},{sector:"Some Sector"}]}, function(err, user) 
+ {
+    if (err)
+    {
+        res.send(err);
+    }
+    console.log(user);
+    res.json(user);
+
+ });
