@@ -24,8 +24,8 @@ module.exports.updateStock = function(obj,callback){
   Stock.findByIdAndUpdate(obj.id,{ "$push": { "IP": obj.IP }, "$inc": {likes: 1} },{new: true},callback)
 }
 
-module.exports.getTwoStock = function(obj,callback){
-  Stock.findByIdAndUpdate(obj.id,{ "$push": { "IP": obj.IP }, "$inc": {likes: 1} },{new: true},callback)
+module.exports.getTwoStock = function(name1,name2,callback){
+  Stock.find({$or:[{stock: name1},{stock:name2}]},callback)
 }
 
 module.exports.updateTwoStock = function(obj,callback){
