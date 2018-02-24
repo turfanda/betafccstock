@@ -82,10 +82,10 @@ $(function() {
               var ResultDiv = $("<div>");
               ResultDiv.append($("<div>").addClass("infoDiv").html("<p><em><b>Stock1 Name :</b></em>" + result.stock1 +
                                                                    "</p><p><em><b>Stock1 Price :</b></em>" + result.price1 +
-                                                                   "<p><em><b>Stock1 Rel_Like :</b></em>"+ result.like1+
+                                                                   "<p><em><b>Stock1 Rel_Like :</b></em>"+ (result.like1-result.like2)+
                                                                   "<p><em><b>Stock2 Name :</b></em>" + result.stock2 +
                                                                    "</p><p><em><b>Stock2 Price :</b></em>" + result.price2 +
-                                                                   "<p><em><b>Stock2 Like :</b></em>"+ result.like2));
+                                                                   "<p><em><b>Stock2 Rel_Like :</b></em>"+ (result.like2-result.like1)));
               $(".resultDiv").append(ResultDiv);
             },
             error: function(err) {

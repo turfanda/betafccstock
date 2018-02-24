@@ -57,6 +57,21 @@ exports.compareStock = function(req, res) {
     });
   }
   else{
-  
+      stockModel.getTwoStock(req.body.stock[0].toUpperCase(),req.body.stock[1].toUpperCase(), function(err, data) {
+      if (err) return res.status(501).send("Internal Error");
+      if (data.length == 0){
+        let stock1 = new stockModel({
+                stock: req.body.stock[0].toUpperCase(),
+                likes: 1,
+                IP: [req.headers['x-forwarded-for'].split(',')[0]]
+            });
+        stockModel.createStock(stock, function(err, data) {
+          if (err) return res.status(501).send("Internal Error");
+          else {
+            return res.status(200).send(data.likes.toString());
+          }
+        });
+      } 
+    });
   }
 }
