@@ -31,6 +31,7 @@ exports.createStock = function(req, res) {
           stockModel.updateStock({
                 IP: req.headers['x-forwarded-for'].split(',')[0]
             }, function(err, data) {
+            console
                 if (err) return res.status(501).send("Internal Error");
                 else {
                     return res.status(200).send(data[0].likes.toString());
@@ -60,7 +61,7 @@ exports.compareStock = function(req, res) {
       stockModel.getTwoStock(req.body.stock[0].toUpperCase(),req.body.stock[1].toUpperCase(), function(err, data) {
       if (err) return res.status(501).send("Internal Error");
       if (data.length == 0){
-        let stock1 = new stockModel({
+        let stock = new stockModel({
                 stock: req.body.stock[0].toUpperCase(),
                 likes: 1,
                 IP: [req.headers['x-forwarded-for'].split(',')[0]]
