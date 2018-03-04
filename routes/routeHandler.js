@@ -36,9 +36,10 @@ exports.createStock = function(req, res) {
                 IP: req.headers['x-forwarded-for'].split(',')[0]
             }, function(err, data) {
             console.log(data);
+            
                 if (err) return res.status(501).send("Internal Error");
                 else {
-                    return res.status(200).send(data[0].likes.toString());
+                    return res.status(200).send(data.likes.toString());
                 }
             });
         } 
